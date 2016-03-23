@@ -47,12 +47,20 @@ class Application extends CI_Controller {
 	function makemenu()
 	{
 		$choices = array();
-
-		$choices[] = array('name' => "Alpha", 'link' => '/alpha');
-		$choices[] = array('name' => "Beta", 'link' => '/beta');
-		$choices[] = array('name' => "Gamma", 'link' => '/gamma');
-		$choices[] = array('name' => "Login", 'link' => '/auth');
-		$choices[] = array('name' => "Logout", 'link' => '/auth/logout');
+                $userRole = $this->session->userdata('userRole');
+                $choices[] = array('name' => "Alpha", 'link' => '/alpha');
+                if(!$userRole){
+                     $choices[] = array('name' => "Login", 'link' => '/auth');
+                }
+                if($userRole == 'admin'){
+                    $choices[] = array('name' => "Beta", 'link' => '/beta');
+                    $choices[] = array('name' => "Gamma", 'link' => '/gamma');
+                    $choices[] = array('name' => "Logout", 'link' => '/auth/logout');
+                }
+                if($userRole == 'user'){
+                    $choices[] = array('name' => "Beta", 'link' => '/beta');
+                    $choices[] = array('name' => "Logout", 'link' => '/auth/logout');
+                }
 		return $choices;
 	}
 
