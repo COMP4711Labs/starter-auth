@@ -39,6 +39,7 @@ class Application extends CI_Controller {
 
 		// finally, build the browser page!
 		$this->data['data'] = &$this->data;
+             
 		$this->parser->parse('_template', $this->data);
 	}
 
